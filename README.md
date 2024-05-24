@@ -1,4 +1,4 @@
-# FGLair&trade; integration for homeassistant
+# ML model integration for homeassistant
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
@@ -10,11 +10,6 @@
 [![Donate](https://img.shields.io/badge/donate-BuyMeCoffee-yellow.svg)](https://www.buymeacoffee.com/bigmoby)
 
 This is a platform for interacting with a ML model under [TODO] component of Home Assistant.
-
-## Sample UI:
-
-![UI_SCREENSHOT1](Capture.PNG)
-![UI_SCREENSHOT2](Capture2.PNG)
 
 ## Installation
 
