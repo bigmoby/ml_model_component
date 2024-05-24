@@ -35,6 +35,11 @@ https://github.com/bigmoby/ml_model_component
 
 In Home Assistant->Settings->Device & services->Integration menu add the new integration ML model and configure it.
 
+### How to test it
+
+Send a MQTT message with this payload `1,2,3` to this topic `home-assistant/ml_model`
+Read in `ml_model.model_outcome` sensor state the model outcome
+
 [releases-shield]: https://img.shields.io/github/release/bigmoby/ml_model_component.svg
 [releases]: https://github.com/bigmoby/ml_model_component/releases
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
