@@ -77,9 +77,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         """Service to send a message."""
         hass.components.mqtt.async_publish(DEFAULT_TOPIC, call.data.get("new_state"))
 
-    # Register our service with Home Assistant.
-    hass.services.async_register(DOMAIN, "set_state", set_state_service)
-
     await hass.components.mqtt.async_subscribe(DEFAULT_TOPIC, message_received)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
