@@ -2,14 +2,11 @@
   "config": {
     "step": {
       "user": {
-        "title": "Connect to FGLair",
-        "description": "Connect using your FGLair account.",
+        "title": "Create the ML model integration",
+        "description": "Create the ML model integration.",
         "data": {
           "username": "Email",
-          "password": "Password",
-          "region": "Region",
-          "tokenpath": "Token path",
-          "temperature_offset": "Temperature offset"
+          "password": "Password"
         }
       }
     },
@@ -19,7 +16,7 @@
       "unknown": "[%key:common::config_flow::error::unknown%]"
     },
     "abort": {
-      "already_configured": "FGLair integration already configured for this email. Access token has been refreshed."
+      "already_configured": "ML model integration already configured for this email. Access token has been refreshed."
     }
   }
 }

@@ -78,3 +78,13 @@ DEFAULT_TOPIC = "home-assistant/ml_model"
 """
 str: The default MQTT topic used by the integration.
 """
+
+ML_MODEL_SUFFIXES = ("pkl", "pyc")
+"""
+list: The list of ml model file type that this integration supports.
+"""
+
+ACCEPTED_SUFFIX_FILE = ", ".join(f".{ext}" for ext in ML_MODEL_SUFFIXES)
+"""
+str: The joined stringed version of ml model file type that this integration supports.
+"""

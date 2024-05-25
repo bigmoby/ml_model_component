@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name        = "ml_model_component"
 version     = "0.0.1"
 license     = {text = "MIT License"}
-description = "Python Library for interacting with a ML model."
+description = "Home Assistant integration for interacting with a ML model."
 readme      = "README.md"
 authors     = [
     {name = "Fabio Bigmoby Mauro", email = ""}
@@ -19,7 +19,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.11",
-    "Topic :: FGLair heat pump controller integration",
+    "Topic :: Home Assistant integration for interacting with a ML model",
 ]
 requires-python = ">=3.12.0"
 

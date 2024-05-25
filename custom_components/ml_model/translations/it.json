@@ -2,14 +2,11 @@
   "config": {
     "step": {
       "user": {
-        "title": "Connetti FGLair",
-        "description": "Connessione account a FGLair.",
+        "title": "Crea l'integrazione ML model",
+        "description": "Crea l'integrazione ML model.",
         "data": {
           "username": "Email",
-          "password": "Password",
-          "region": "Region",
-          "tokenpath": "Token path",
-          "temperature_offset": "Temperature offset"
+          "password": "Password"
         }
       }
     },
@@ -19,7 +16,7 @@
       "unknown": "[%key:common::config_flow::error::unknown%]"
     },
     "abort": {
-      "already_configured": "L'integrazione FGLair è già configurata con queste credenziali di accesso. Access token has been refreshed."
+      "already_configured": "L'integrazione ML model è già configurata con queste credenziali di accesso. Access token has been refreshed."
     }
   }
 }

@@ -4,6 +4,7 @@ with Home Assistant.
 
 import logging
 
+from homeassistant.components import mqtt
 from homeassistant.components.mqtt.models import ReceiveMessage
 from homeassistant.config_entries import ConfigEntry
 
@@ -75,9 +76,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     @callback
     def set_state_service(call: ServiceCall) -> None:
         """Service to send a message."""
-        hass.components.mqtt.async_publish(DEFAULT_TOPIC, call.data.get("new_state"))
+        mqtt.async_publish(hass, DEFAULT_TOPIC, call.data.get("new_state"))
 
-    await hass.components.mqtt.async_subscribe(DEFAULT_TOPIC, message_received)
+    await mqtt.async_subscribe(hass, DEFAULT_TOPIC, message_received)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

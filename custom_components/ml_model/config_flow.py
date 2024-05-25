@@ -4,16 +4,20 @@ import logging
 
 from homeassistant import config_entries
 from homeassistant.config_entries import ConfigFlowResult
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.const import CONF_FILE_PATH, CONF_PASSWORD, CONF_USERNAME
+from homeassistant.helpers.selector import FileSelector, FileSelectorConfig
 import voluptuous as vol
 
-from .const import DOMAIN
+from .const import ACCEPTED_SUFFIX_FILE, DOMAIN
 
 _LOGGER: logging.Logger = logging.getLogger(__package__)
 DATA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_USERNAME, default=""): str,
         vol.Required(CONF_PASSWORD, default=""): str,
+        vol.Required(CONF_FILE_PATH): FileSelector(
+            FileSelectorConfig(accept=ACCEPTED_SUFFIX_FILE)
+        ),
     }
 )
 

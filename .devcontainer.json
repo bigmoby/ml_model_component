@@ -1,5 +1,5 @@
 {
-    "name": "bigmoby/fglair_for_homeassistant",
+    "name": "bigmoby/ml_modelml_model_component",
     "image": "mcr.microsoft.com/vscode/devcontainers/python:dev-3.12-bullseye",
     "postCreateCommand": "scripts/setup",
     "forwardPorts": [
