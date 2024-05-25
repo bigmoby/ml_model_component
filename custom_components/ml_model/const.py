@@ -88,3 +88,8 @@ ACCEPTED_SUFFIX_FILE = ", ".join(f".{ext}" for ext in ML_MODEL_SUFFIXES)
 """
 str: The joined stringed version of ml model file type that this integration supports.
 """
+
+ML_MODEL_LOCAL_FILE = "ml_model_local_file"
+"""
+str: The uploaded ML model local file.
+"""

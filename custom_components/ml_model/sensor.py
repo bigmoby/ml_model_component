@@ -14,7 +14,7 @@ from homeassistant.const import UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import LOADED_MODEL, NAME
+from .const import LOADED_MODEL, ML_MODEL_LOCAL_FILE, NAME
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -29,6 +29,9 @@ async def async_setup_entry(
 
     # username: str = entry.data[CONF_USERNAME]
     # password: str = entry.data[CONF_PASSWORD]
+
+    ml_model_file: str = entry.data[ML_MODEL_LOCAL_FILE]
+    _LOGGER.debug("ml_model_file : %s", ml_model_file)
 
     new_entities = []
 
