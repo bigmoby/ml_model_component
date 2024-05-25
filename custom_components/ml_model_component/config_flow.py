@@ -8,17 +8,24 @@ import shutil
 from homeassistant import config_entries
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.config_entries import ConfigFlowResult
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers.selector import FileSelector, FileSelectorConfig
 import voluptuous as vol
 
-from .const import ACCEPTED_SUFFIX_FILE, DOMAIN, ML_MODEL_LOCAL_FILE
+from .const import (
+    ACCEPTED_SUFFIX_FILE,
+    DEFAULT_INPUT_TOPIC,
+    DEFAULT_OUTPUT_TOPIC,
+    DOMAIN,
+    ML_MODEL_INPUT_TOPIC,
+    ML_MODEL_LOCAL_FILE,
+    ML_MODEL_OUTPUT_TOPIC,
+)
 
 _LOGGER: logging.Logger = logging.getLogger(__package__)
 DATA_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_USERNAME, default=""): str,
-        vol.Required(CONF_PASSWORD, default=""): str,
+        vol.Required(ML_MODEL_INPUT_TOPIC, default=DEFAULT_INPUT_TOPIC): str,
+        vol.Required(ML_MODEL_OUTPUT_TOPIC, default=DEFAULT_OUTPUT_TOPIC): str,
         vol.Required(ML_MODEL_LOCAL_FILE): FileSelector(
             FileSelectorConfig(accept=ACCEPTED_SUFFIX_FILE)
         ),
@@ -40,8 +47,8 @@ class MLModelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: igno
 
     @cached_property
     def _uploaded_dir(self) -> Path:
-        """Return real path to "/www/ml_model_storage" directory."""
-        return self._local_dir / "ml_model_storage"
+        """Return real path to "/www/DOMAIN" directory."""
+        return self._local_dir / DOMAIN
 
     def _save_uploaded_file(self, uploaded_file_id: str) -> str:
         """Save uploaded file.
@@ -84,12 +91,12 @@ class MLModelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: igno
         if user_input is None:
             return self.async_show_form(step_id="user", data_schema=DATA_SCHEMA)
 
-        username = user_input[CONF_USERNAME]
-        password = user_input[CONF_PASSWORD]
-        unique_id = await self.async_set_unique_id(username)
+        ml_input_topic = user_input[ML_MODEL_INPUT_TOPIC]
+        ml_output_topic = user_input[ML_MODEL_OUTPUT_TOPIC]
+        unique_id = await self.async_set_unique_id(ml_input_topic)
 
         _LOGGER.debug("Creating unique ID %s", unique_id)
-        self._abort_if_unique_id_configured({CONF_USERNAME: username})
+        self._abort_if_unique_id_configured({ML_MODEL_INPUT_TOPIC: ml_input_topic})
 
         uploaded_file_id = user_input.get(ML_MODEL_LOCAL_FILE)
 
@@ -100,10 +107,10 @@ class MLModelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: igno
         _LOGGER.debug("Stored ML model file %s", local_file)
 
         entry = self.async_create_entry(
-            title=username,
+            title=ml_input_topic,
             data={
-                CONF_USERNAME: username,
-                CONF_PASSWORD: password,
+                ML_MODEL_INPUT_TOPIC: ml_input_topic,
+                ML_MODEL_OUTPUT_TOPIC: ml_output_topic,
                 ML_MODEL_LOCAL_FILE: local_file,
             },
         )

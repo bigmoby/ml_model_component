@@ -18,9 +18,11 @@ from homeassistant.core import HomeAssistant, ServiceCall, callback
 
 # from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .const import (
-    DEFAULT_TOPIC,
+    DEFAULT_INPUT_TOPIC,
     DOMAIN,
+    ML_MODEL_INPUT_TOPIC,
     ML_MODEL_LOCAL_FILE,
+    ML_MODEL_OUTPUT_TOPIC,
     PLATFORMS,
     STARTUP_MESSAGE,
 )
@@ -54,8 +56,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.data.setdefault(DOMAIN, {})
         _LOGGER.info(STARTUP_MESSAGE)
 
-    # username = entry.data.get(CONF_USERNAME)
-    # password = entry.data.get(CONF_PASSWORD)
+    ml_input_topic = entry.data.get(ML_MODEL_INPUT_TOPIC)
+    ml_output_topic = entry.data.get(ML_MODEL_OUTPUT_TOPIC)
     ml_model_file = entry.data.get(ML_MODEL_LOCAL_FILE)
 
     # session = async_get_clientsession(hass)
@@ -90,9 +92,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     @callback
     def set_state_service(call: ServiceCall) -> None:
         """Service to send a message."""
-        mqtt.async_publish(hass, DEFAULT_TOPIC, call.data.get("new_state"))
+        mqtt.async_publish(hass, ml_input_topic, call.data.get("new_state"))
 
-    await mqtt.async_subscribe(hass, DEFAULT_TOPIC, message_received)
+    await mqtt.async_subscribe(hass, ml_output_topic, message_received)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

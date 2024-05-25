@@ -64,9 +64,24 @@ STARTUP_MESSAGE = (
 str: The startup message displayed when the integration is loaded.
 """
 
-DEFAULT_TOPIC = "home-assistant/ml_model_component"
+DEFAULT_INPUT_TOPIC = "home-assistant/ml_model_component"
 """
-str: The default MQTT topic used by the integration.
+str: The default MQTT input topic used by the integration.
+"""
+
+DEFAULT_OUTPUT_TOPIC = "home-assistant/ml_model_component/outcome"
+"""
+str: The default MQTT output topic used by the integration.
+"""
+
+ML_MODEL_INPUT_TOPIC = "ml_model_input_topic"
+"""
+str: The mqtt input topic identifier.
+"""
+
+ML_MODEL_OUTPUT_TOPIC = "ml_model_output_topic"
+"""
+str: The mqtt output topic identifier.
 """
 
 ML_MODEL_SUFFIXES = ("pkl", "pyc")
