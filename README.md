@@ -41,7 +41,7 @@ In Home Assistant->Settings->Device & services->Integration menu add the new int
 
 2. Send a MQTT message with this payload `1,2,3` to this topic `home-assistant/ml_model`.
 
-3. Read in `ml_model.model_outcome` sensor state the model outcome.
+3. Read in `ml_model.model_outcome` service state the model outcome.
 
 [releases-shield]: https://img.shields.io/github/release/bigmoby/ml_model_component.svg
 [releases]: https://github.com/bigmoby/ml_model_component/releases

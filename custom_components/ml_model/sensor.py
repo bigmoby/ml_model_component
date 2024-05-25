@@ -14,7 +14,7 @@ from homeassistant.const import UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import LOADED_MODEL, ML_MODEL_LOCAL_FILE, NAME
+from .const import ML_MODEL_LOCAL_FILE, NAME
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,6 +48,8 @@ class MLModelSensor(SensorEntity):
     _attr_device_class = SensorDeviceClass.TEMPERATURE
     _attr_state_class = SensorStateClass.MEASUREMENT
 
+
+'''
     def update(self) -> None:
         """Fetch new state data for the sensor.
 
@@ -60,3 +62,4 @@ class MLModelSensor(SensorEntity):
 
         _LOGGER.debug("Outcome : %s\nCoefficients : %s", outcome, coefficients)
         self._attr_native_value = outcome
+'''
