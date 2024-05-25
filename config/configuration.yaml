@@ -2,7 +2,7 @@
 default_config:
 
 logger:
-  default: error
+  default: warn
   logs:
     custom_components.ml_model_controller_integration.sensor: debug
     homeassistant: warn
