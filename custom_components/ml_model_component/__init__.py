@@ -12,17 +12,13 @@ except ImportError:
 from homeassistant.components import mqtt
 from homeassistant.components.mqtt.models import ReceiveMessage
 from homeassistant.config_entries import ConfigEntry
-
-# from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
-from homeassistant.core import HomeAssistant, ServiceCall, callback
+from homeassistant.core import HomeAssistant, callback
 
 # from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .const import (
-    DEFAULT_INPUT_TOPIC,
     DOMAIN,
     ML_MODEL_INPUT_TOPIC,
     ML_MODEL_LOCAL_FILE,
-    ML_MODEL_OUTPUT_TOPIC,
     PLATFORMS,
     STARTUP_MESSAGE,
 )
@@ -57,7 +53,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER.info(STARTUP_MESSAGE)
 
     ml_input_topic = entry.data.get(ML_MODEL_INPUT_TOPIC)
-    ml_output_topic = entry.data.get(ML_MODEL_OUTPUT_TOPIC)
+    # ml_output_topic = entry.data.get(ML_MODEL_OUTPUT_TOPIC)
     ml_model_file = entry.data.get(ML_MODEL_LOCAL_FILE)
 
     # session = async_get_clientsession(hass)
@@ -67,8 +63,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     @callback
     def message_received(args: ReceiveMessage) -> None:
         """Receive a new MQTT message."""
-
-        # logging.warning(args)  #just log the object to see how it looks
 
         # topic = getattr(args, "topic")
         payload = getattr(args, "payload")
@@ -87,14 +81,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.states.async_set(entity_id, outcome)
 
     hass.states.async_set(entity_id, "No messages")
-
-    # Service to publish a message on MQTT.
-    @callback
-    def set_state_service(call: ServiceCall) -> None:
-        """Service to send a message."""
-        mqtt.async_publish(hass, ml_input_topic, call.data.get("new_state"))
-
-    await mqtt.async_subscribe(hass, ml_output_topic, message_received)
+    _LOGGER.debug("Subscribe to mqtt input topic : %s", ml_input_topic)
+    await mqtt.async_subscribe(hass, ml_input_topic, message_received)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

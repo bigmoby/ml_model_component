@@ -64,12 +64,12 @@ STARTUP_MESSAGE = (
 str: The startup message displayed when the integration is loaded.
 """
 
-DEFAULT_INPUT_TOPIC = "home-assistant/ml_model_component"
+DEFAULT_INPUT_TOPIC = "homeassistant/sensor/ml_model_component/input"
 """
 str: The default MQTT input topic used by the integration.
 """
 
-DEFAULT_OUTPUT_TOPIC = "home-assistant/ml_model_component/outcome"
+DEFAULT_OUTPUT_TOPIC = "homeassistant/sensor/ml_model_component/outcome"
 """
 str: The default MQTT output topic used by the integration.
 """

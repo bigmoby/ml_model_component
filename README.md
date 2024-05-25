@@ -39,9 +39,9 @@ In Home Assistant->Settings->Device & services->Integration menu add the new int
 
 1. Add an MQTT integration for an already configured mqtt running broker.
 
-2. Send a MQTT message with this payload `1,2,3` to this topic `home-assistant/ml_model_component`.
+2. Send a MQTT message with this payload `1,2,3` to this topic `homeassistant/sensor/ml_model_component/input`.
 
-3. Read in `ml_model_component.outcome` service state the model outcome.
+3. Read in `ml_model_component.outcome` service state the model outcome [TODO ...or `homeassistant/sensor/ml_model_component/outcome` mqtt topic]
 
 [releases-shield]: https://img.shields.io/github/release/bigmoby/ml_model_component.svg
 [releases]: https://github.com/bigmoby/ml_model_component/releases
