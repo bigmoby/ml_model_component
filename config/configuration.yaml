@@ -4,5 +4,5 @@ default_config:
 logger:
   default: warn
   logs:
-    custom_components.ml_model: debug
-    homeassistant: warn
+    custom_components.ml_model_component: debug
+    homeassistant: error
